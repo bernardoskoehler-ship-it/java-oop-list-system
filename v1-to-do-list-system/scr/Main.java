@@ -1,17 +1,32 @@
 import java.util.ArrayList;
 
 public class main {
+	static ArrayList <Tarefas> tarefas = new ArrayList<>();
+	
 	public static void main(String[] args) {
-		ArrayList <Tarefas> tarefas = new ArrayList<>();
-		tarefas.add(new Tarefas("Beber agua"));
-		tarefas.add(new Tarefas("Beber cocacola"));
-		tarefas.add(new Tarefas("Beber fanta"));
-		tarefas.remove(1);
+		adicionarTarefa("Beber agua");
+		adicionarTarefa("Tomar Banho");
+		adicionarTarefa("ir as Compras");
+		removerTarefa(1);
 		
+		listarTarefas();
 		
-		for(Tarefas t : tarefas) {
-			System.out.println(t.getNome());
+	}
+		
+	public static void adicionarTarefa(String nome) {
+		tarefas.add(new Tarefas(nome));
+	}
+	public static void removerTarefa(int posicao) {
+		if(posicao < tarefas.size() && posicao >= 0) {
+		tarefas.remove(posicao);
 		}
-		
+	}
+	public static void listarTarefas() {
+		int posicao = 0;
+		for(Tarefas t : tarefas) {
+			System.out.println(posicao +" - " +t.getNome());
+			posicao ++;
+
+		}
 	}
 }
