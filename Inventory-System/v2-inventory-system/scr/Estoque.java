@@ -47,9 +47,10 @@ public class Estoque {
         }
     }
 
-    public void listarProdutos() {
-        for(Map.Entry<String, Produto> entry : lista.entrySet()) {
-            System.out.println(entry.getValue() +"x " +entry.getKey());
+   public void listarProdutos() {
+        for (Map.Entry<String, Produto> entry : lista.entrySet()) {
+            Produto produto = entry.getValue();
+            System.out.println(produto.getQuantidade() + "x " + entry.getKey());
         }
     }
 }
