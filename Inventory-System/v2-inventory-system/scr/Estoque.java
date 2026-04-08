@@ -12,20 +12,26 @@ public class Estoque {
     }
 
     public void adicionarProduto(String nome, int quantidade) {
-        if(!nomeValido(nome)) {
+        if (!nomeValido(nome)) {
             System.out.println("nome inserido invalido");
             return;
         }
-        if(!valorValido(quantidade)) {
+
+        if (!valorValido(quantidade)) {
             System.out.println("quantidade inserida invalida");
             return;
         }
-        if(lista.containsKey(nome)) {
-                lista.get(nome).adicionarQuantidade(quantidade);
-                return;
+
+        Produto produto = lista.get(nome);
+
+        if (produto != null) {
+            produto.adicionarQuantidade(quantidade);
+            return;
         }
-        lista.put(nome, new Produto(nome));
-        lista.get(nome).adicionarQuantidade(quantidade);
+
+        produto = new Produto(nome);
+        produto.adicionarQuantidade(quantidade);
+        lista.put(nome, produto);
     }
 
     public void removerProduto(String nome, int quantidade) {
@@ -37,21 +43,23 @@ public class Estoque {
             System.out.println("quantidade inserida invalida");
             return;
         }
-        if(!lista.containsKey(nome)) {
-            System.out.println(nome +" indisponivel");
+
+        Produto produto = lista.get(nome);
+        if (produto == null) {
+            System.out.println(nome + " indisponivel");
             return;
         }
-        if(lista.get(nome).getQuantidade() < quantidade) {
+        if (produto.getQuantidade() < quantidade) {
             System.out.println("Nao tem estoque o suficiente para remover");
             return;
         }
-        lista.get(nome).removerQuantidade(quantidade);
-        if(lista.get(nome).getQuantidade() <= 0) {
+        produto.removerQuantidade(quantidade);
+        if (produto.getQuantidade() <= 0) {
             lista.remove(nome);
         }
     }
 
-   public void listarProdutos() {
+    public void listarProdutos() {
         for (Map.Entry<String, Produto> entry : lista.entrySet()) {
             Produto produto = entry.getValue();
             System.out.println(produto.getQuantidade() + "x " + entry.getKey());
