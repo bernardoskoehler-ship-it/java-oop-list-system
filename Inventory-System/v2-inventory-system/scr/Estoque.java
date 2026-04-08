@@ -10,6 +10,9 @@ public class Estoque {
     private boolean nomeValido(String nome) {
         return nome != null && !nome.trim().isEmpty();
     }
+    private String ajustarNome(String nome) {
+        return nome.trim().toLowerCase();
+    }
 
     public void adicionarProduto(String nome, int quantidade) {
         if (!nomeValido(nome)) {
@@ -21,7 +24,7 @@ public class Estoque {
             System.out.println("quantidade inserida invalida");
             return;
         }
-
+        nome = ajustarNome(nome);
         Produto produto = lista.get(nome);
 
         if (produto != null) {
@@ -43,7 +46,7 @@ public class Estoque {
             System.out.println("quantidade inserida invalida");
             return;
         }
-
+        nome = ajustarNome(nome);
         Produto produto = lista.get(nome);
         if (produto == null) {
             System.out.println(nome + " indisponivel");
