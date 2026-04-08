@@ -41,6 +41,10 @@ public class Estoque {
             System.out.println(nome +" indisponivel");
             return;
         }
+        if(lista.get(nome).getQuantidade() > quantidade) {
+            System.out.println("Nao tem estoque o suficiente para remover");
+            return;
+        }
         lista.get(nome).removerQuantidade(quantidade);
         if(lista.get(nome).getQuantidade() <= 0) {
             lista.remove(nome);
